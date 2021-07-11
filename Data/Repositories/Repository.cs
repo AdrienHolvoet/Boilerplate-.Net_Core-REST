@@ -79,12 +79,11 @@ namespace Boilerplate_.Net_Core_REST.Data.Repositories
 
             if (entityToUpdate == null) throw new ArgumentNullException("entity");
 
+            T entity = this.GetById(entityToUpdate.Id);  // You need to have access to key
 
-            T attachedEntity = this.GetById(entityToUpdate.Id);  // You need to have access to key
-                                                                 //Set Previous DateCreated
-            entityToUpdate.CreatedAt = attachedEntity.CreatedAt;
+            entityToUpdate.CreatedAt = entity.CreatedAt;
             entityToUpdate.UpdatedAt = DateTime.Now;
-            dbSet.Update(entityToUpdate);
+            _context.Entry(entity).CurrentValues.SetValues(entityToUpdate);
 
             return entityToUpdate;
         }
