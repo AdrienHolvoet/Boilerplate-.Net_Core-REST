@@ -13,3 +13,11 @@ https://github.com/OmniSharp/omnisharp-vscode/issues/4201
 # TO RUN
 
 dotnet run
+
+# Architecture
+
+ N-Tier architecture(AKA Layered Architecture) is used(separation of concern) : 
+ Each of these layers should be Single Responsibility to avoid tight coupling and to support Separation of Concern.
+ 
+ Client ===> PRESENTATION LAYER(Controllers) ===> BUSINESS LOGIC LAYER(Services) ===> DATA ACCES LAYER(Repositories) ===> Database
+
