@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Boilerplate.Data.Contexts
 {
-
     public class DatabaseContext : DbContext
     {
         public DbSet<Author> authors { get; set; }

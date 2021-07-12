@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Boilerplate.Business.Services.Interfaces;
-using Boilerplate.Data.Interfaces;
 using Boilerplate.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

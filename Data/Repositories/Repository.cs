@@ -71,7 +71,6 @@ namespace Boilerplate.Data.Repositories
                 entity.UpdatedAt = currentDate;
             }
 
-
             dbSet.AddRange(entities);
         }
 

@@ -19,10 +19,10 @@ dotnet run
 # TO DO
 
 - Base CRUD controller
-- AutoMapping
 - Authentification(jwt, google, facebook)
 - Add logging Services
 - Add configuration files to get the constants
+- Connect to db
 
 # Architecture
 

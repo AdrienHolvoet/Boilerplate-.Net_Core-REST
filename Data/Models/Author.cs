@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Boilerplate.Data.Models;
 
 namespace Boilerplate.Data.Models
 {

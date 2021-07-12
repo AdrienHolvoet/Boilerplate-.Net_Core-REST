@@ -10,8 +10,13 @@ namespace Boilerplate.Business.Mappers
         public MappingProfile()
         {
             // Add as many of these lines as you need to map your objects
+            //CreateMap<TSource,TDestination>()
+
             CreateMap<Book, BookDto>();
             CreateMap<BookDto, Book>();
+
+            CreateMap<Author, AuthorDto>();
+            CreateMap<AuthorDto, Author>();
         }
     }
 }
