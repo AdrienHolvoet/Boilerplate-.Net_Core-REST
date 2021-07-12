@@ -12,19 +12,17 @@
 
 If error with omnisharp on ubuntu add a symlink : 
 https://github.com/OmniSharp/omnisharp-vscode/issues/4201
-# TO RUN
 
+# TO RUN
 dotnet run
 
 # TO DO
-
 - Authentification(jwt, google, facebook)
 - Add logging Services
 - Add configuration files to get the constants
 - Connect to db
 
 # Architecture
-
  N-Tier architecture(AKA Layered Architecture) is used(separation of concern) : 
  Each of these layers should be Single Responsibility to avoid tight coupling and to support Separation of Concern.
  

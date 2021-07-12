@@ -4,9 +4,9 @@ using Boilerplate_REST.Data.Models;
 
 namespace Boilerplate_REST.Business.Services.Implementations
 {
-    public class BookService : BaseService<Book>, IBookService
+    public class AuthorService : BaseService<Author>, IAuthorService
     {
-        public BookService(IRepository<Book> repository) : base(repository)
+        public AuthorService(IRepository<Author> repository) : base(repository)
         {
         }
         //Add new business logic

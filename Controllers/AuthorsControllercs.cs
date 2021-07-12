@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
 using Boilerplate_REST.Data.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Boilerplate_REST.Controllers
@@ -11,28 +11,29 @@ namespace Boilerplate_REST.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthorsController : ControllerBase
+    public class AuthorsController : BaseCrudController<AuthorDto, AuthorDto, Author>
     {
-        private IBaseService<Author> _authorService;
+        private IAuthorService _authorService;
 
-        public AuthorsController(IBaseService<Author> authorService)
-        { _authorService = authorService; }
-
-        [HttpGet("")]
-        public IEnumerable<Author> GetAllAuthors() => _authorService.GetAll();
-
-        [HttpGet("{authorName}")]
-        public Author GetAuthorByName(String authorName)
+        public AuthorsController(IMapper mapperService, IAuthorService service) : base(mapperService, service)
         {
-            return _authorService.Get(author => author.Name == authorName).SingleOrDefault();
+            _authorService = service;
         }
 
-        [HttpPost("")]
-        [AllowAnonymous]
-        public void AddAuthor([FromBody] Author author)
+        [HttpGet("name/{authorName}")]
+        public IActionResult GetAuthorByName(String authorName)
         {
-            _authorService.Add(author);
-            _authorService.SaveChanges();
+            try
+            {
+                var author = _authorService.Get(author => author.Name == authorName).FirstOrDefault();
+
+                return Ok(_mapperService.Map<AuthorDto>(author));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

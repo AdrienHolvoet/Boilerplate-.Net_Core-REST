@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Boilerplate_REST.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class BooksController : BaseCrudController<BookDto, BookDto, Book>
     {
         IBookService _bookService;

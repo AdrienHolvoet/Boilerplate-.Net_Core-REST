@@ -44,6 +44,7 @@ namespace Boilerplate
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddTransient(typeof(IBookService), typeof(BookService));
+            services.AddTransient(typeof(IAuthorService), typeof(AuthorService));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

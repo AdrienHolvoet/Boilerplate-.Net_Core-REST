@@ -142,7 +142,7 @@ namespace Boilerplate_REST.Controllers
             }
         }
 
-        [HttpGet("Count")]
+        [HttpGet("count")]
         public virtual IActionResult Count()
         {
             try
@@ -156,7 +156,7 @@ namespace Boilerplate_REST.Controllers
         }
 
         // Post: api/categories/
-        [HttpPost("Collection")]
+        [HttpPost("collection")]
         public virtual IActionResult PostCollection([FromBody] List<TRequestDto> requestDtos)
         {
             try
