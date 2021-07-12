@@ -1,4 +1,6 @@
 using Boilerplate.Data.Contexts;
+using Boilerplate_.Net_Core_REST.Business.Services.Implementations;
+using Boilerplate_.Net_Core_REST.Business.Services.Interfaces;
 using Boilerplate_.Net_Core_REST.Data.Interfaces;
 using Boilerplate_.Net_Core_REST.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -26,6 +28,7 @@ namespace Boilerplate
             services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

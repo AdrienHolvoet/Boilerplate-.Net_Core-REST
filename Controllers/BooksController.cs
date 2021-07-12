@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Boilerplate.Data.Models;
+using Boilerplate_.Net_Core_REST.Business.Services.Interfaces;
 using Boilerplate_.Net_Core_REST.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,25 +12,40 @@ namespace Boilerplate_.Net_Core_REST.Controllers
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
-        private IRepository<Book> _bookRepository;
-        public BooksController(IRepository<Book> bookRepository)
-        { this._bookRepository = bookRepository; }
+        private IBaseService<Book> _bookService;
+        public BooksController(IBaseService<Book> bookService)
+        { this._bookService = bookService; }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Book> GetAllBooks() { return _bookRepository.GetAll(); }
+        public IEnumerable<Book> GetAllBooks() { return _bookService.GetAll(); }
 
         [HttpGet]
         [Route("{bookId}")]
-        public Book GetBookById(Guid bookId) => _bookRepository.GetById(bookId);
+        public Book GetBookById(Guid bookId) => _bookService.GetSingleById(bookId);
 
         [HttpPut]
         [Route("{bookId}")]
-        public Book UpdateBook(Guid bookId, [FromBody] Book book)
+        public IActionResult UpdateBook(Guid bookId, [FromBody] Book book)
         {
-            var updatedBook = _bookRepository.Update(book);
-            _bookRepository.Commit();
-            return book;
+            try
+            {
+                var oldItem = _bookService.GetSingleById(bookId);
+
+                if (oldItem == null)
+                    return NotFound("Book not found.");
+
+                var updatedBook = _bookService.Update(book);
+                _bookService.SaveChanges();
+
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
         }
 
         [HttpPost]
@@ -37,17 +53,33 @@ namespace Boilerplate_.Net_Core_REST.Controllers
         [AllowAnonymous]
         public void AddBook([FromBody] Book book)
         {
-            _bookRepository.Insert(book);
-            _bookRepository.Commit();
+            _bookService.Add(book);
+            _bookService.SaveChanges();
         }
 
         [HttpDelete]
         [Route("{bookId}")]
         [AllowAnonymous]
-        public void DeleteBook(Guid bookId)
+        public ActionResult DeleteBook(Guid bookId)
         {
-            _bookRepository.Delete(bookId);
-            _bookRepository.Commit();
+
+            try
+            {
+                var oldItem = _bookService.GetSingleById(bookId);
+
+                if (oldItem == null)
+                    return NotFound("Book not found.");
+
+                _bookService.DeleteById(bookId);
+                _bookService.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+          ;
         }
     }
 }

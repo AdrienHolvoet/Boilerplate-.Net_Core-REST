@@ -14,7 +14,6 @@ namespace Boilerplate_.Net_Core_REST.Data.Repositories
     {
         protected readonly DatabaseContext _context;
         private DbSet<T> dbSet;
-        string errorMessage = string.Empty;
         public Repository(DatabaseContext context)
         {
             this._context = context;
@@ -48,7 +47,7 @@ namespace Boilerplate_.Net_Core_REST.Data.Repositories
         {
             return dbSet.SingleOrDefault(s => s.Id == id);
         }
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity");
 
@@ -57,6 +56,8 @@ namespace Boilerplate_.Net_Core_REST.Data.Repositories
             entity.UpdatedAt = currentDate;
 
             dbSet.Add(entity);
+
+            return entity;
         }
 
         public virtual void Insert(List<T> entities)

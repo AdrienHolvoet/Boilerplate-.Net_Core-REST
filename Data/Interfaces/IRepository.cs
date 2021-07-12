@@ -10,11 +10,13 @@ namespace Boilerplate_.Net_Core_REST.Data.Interfaces
     {
         IQueryable<T> GetAll();
         T GetById(Guid id);
-        void Insert(T entity);
+        T Insert(T entity);
         void Insert(List<T> entity);
         T Update(T entity);
         void Delete(Guid id);
         void Delete(T entity);
+        void Delete(List<T> entity);
+
         /// <summary>
         /// Returns the total number of entities that satisfy the given filter
         /// </summary>
