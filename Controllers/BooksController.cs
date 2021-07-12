@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Boilerplate.Business.Services.Interfaces;
+using Boilerplate.Data.Interfaces;
 using Boilerplate.Data.Models;
-using Boilerplate_.Net_Core_REST.Business.Services.Interfaces;
-using Boilerplate_.Net_Core_REST.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Boilerplate_.Net_Core_REST.Controllers
+namespace Boilerplate.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

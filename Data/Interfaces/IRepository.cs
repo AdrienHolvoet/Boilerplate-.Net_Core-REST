@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Boilerplate_.Net_Core_REST.Data.Models;
+using Boilerplate.Data.Models;
 
-namespace Boilerplate_.Net_Core_REST.Data.Interfaces
+namespace Boilerplate.Data.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {

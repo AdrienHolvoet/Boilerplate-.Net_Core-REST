@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Boilerplate_.Net_Core_REST.Data.Models;
+using Boilerplate.Data.Models;
 
 namespace Boilerplate.Data.Models
 {

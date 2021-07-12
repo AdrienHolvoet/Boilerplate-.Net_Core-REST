@@ -1,9 +1,8 @@
 using System;
-using Boilerplate.Data.Models;
 
-namespace Boilerplate.Data.Models
+namespace Boilerplate.Business.DTOs
 {
-    public class Book : BaseEntity
+    public class BookDto : BaseDto
     {
         public string Title { get; set; }
         public DateTime Year { get; set; }

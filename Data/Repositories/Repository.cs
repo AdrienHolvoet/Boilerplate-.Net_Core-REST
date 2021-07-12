@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Boilerplate.Data.Contexts;
-using Boilerplate_.Net_Core_REST.Data.Interfaces;
-using Boilerplate_.Net_Core_REST.Data.Models;
+using Boilerplate.Data.Interfaces;
+using Boilerplate.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Boilerplate_.Net_Core_REST.Data.Repositories
+namespace Boilerplate.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
@@ -119,7 +119,6 @@ namespace Boilerplate_.Net_Core_REST.Data.Repositories
         public virtual void Commit()
         { _context.SaveChanges(); }
 
-        //TODO add in the catch of the controller
         public virtual void Rollback()
         { _context.Dispose(); }
     }

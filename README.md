@@ -1,9 +1,11 @@
 # TO INSTALL
 1) Install dotnet and check with :  dotnet --version
-2) Go into projet and install two NuGet packages
+2) Go into projet and install these NuGet packages
     - dotnet add package Microsoft.EntityFrameworkCore
     - dotnet add package Microsoft.EntityFrameworkCore.InMemory
     - dotnet add package Microsoft.EntityFrameworkCore.Design
+    - dotnet add package AutoMapper --version 10.1.1
+    - dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.1.1
 
 3) Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter : 
 ```ext install temilaj.asp-net-core-vs-code-extension-pack```
@@ -19,6 +21,8 @@ dotnet run
 - Base CRUD controller
 - AutoMapping
 - Authentification(jwt, google, facebook)
+- Add logging Services
+- Add configuration files to get the constants
 
 # Architecture
 
