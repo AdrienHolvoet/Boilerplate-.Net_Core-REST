@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Data.Models;
 
-namespace Boilerplate.Business.Services.Interfaces
+namespace Boilerplate_REST.Business.Services.Interfaces
 {
     public interface IBaseService<T> where T : BaseEntity
     {

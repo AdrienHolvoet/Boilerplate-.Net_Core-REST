@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Data.Models;
 
-namespace Boilerplate.Business.DTOs
+namespace Boilerplate_REST.Business.DTOs
 {
     public class AuthorDto : BaseDto
     {

@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Boilerplate.Business.Services.Interfaces;
-using Boilerplate.Data.Interfaces;
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Business.Services.Interfaces;
+using Boilerplate_REST.Data.Interfaces;
+using Boilerplate_REST.Data.Models;
 
-namespace Boilerplate.Business.Services.Implementations
+namespace Boilerplate_REST.Business.Services.Implementations
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {

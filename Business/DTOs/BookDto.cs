@@ -1,6 +1,6 @@
 using System;
 
-namespace Boilerplate.Business.DTOs
+namespace Boilerplate_REST.Business.DTOs
 {
     public class BookDto : BaseDto
     {

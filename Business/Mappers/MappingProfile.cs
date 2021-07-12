@@ -1,9 +1,9 @@
 using AutoMapper;
-using Boilerplate.Business.DTOs;
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Business.DTOs;
+using Boilerplate_REST.Data.Models;
 
 
-namespace Boilerplate.Business.Mappers
+namespace Boilerplate_REST.Business.Mappers
 {
     public class MappingProfile : Profile
     {

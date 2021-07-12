@@ -18,7 +18,6 @@ dotnet run
 
 # TO DO
 
-- Base CRUD controller
 - Authentification(jwt, google, facebook)
 - Add logging Services
 - Add configuration files to get the constants

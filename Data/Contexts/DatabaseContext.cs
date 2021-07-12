@@ -1,7 +1,7 @@
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Boilerplate.Data.Contexts
+namespace Boilerplate_REST.Data.Contexts
 {
     public class DatabaseContext : DbContext
     {

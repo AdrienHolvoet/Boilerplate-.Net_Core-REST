@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Boilerplate.Business.Services.Interfaces;
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Business.Services.Interfaces;
+using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Boilerplate.Controllers
+namespace Boilerplate_REST.Controllers
 {
 
     [ApiController]

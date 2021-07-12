@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Boilerplate.Data.Contexts;
-using Boilerplate.Data.Interfaces;
-using Boilerplate.Data.Models;
+using Boilerplate_REST.Data.Contexts;
+using Boilerplate_REST.Data.Interfaces;
+using Boilerplate_REST.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Boilerplate.Data.Repositories
+namespace Boilerplate_REST.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {

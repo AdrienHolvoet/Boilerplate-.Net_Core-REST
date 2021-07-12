@@ -1,7 +1,6 @@
 using System;
-using Boilerplate.Data.Models;
 
-namespace Boilerplate.Data.Models
+namespace Boilerplate_REST.Data.Models
 {
     public class Book : BaseEntity
     {

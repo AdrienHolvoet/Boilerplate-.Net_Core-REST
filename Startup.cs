@@ -1,10 +1,10 @@
 using AutoMapper;
-using Boilerplate.Business.Mappers;
-using Boilerplate.Business.Services.Implementations;
-using Boilerplate.Business.Services.Interfaces;
-using Boilerplate.Data.Contexts;
-using Boilerplate.Data.Interfaces;
-using Boilerplate.Data.Repositories;
+using Boilerplate_REST.Business.Mappers;
+using Boilerplate_REST.Business.Services.Implementations;
+using Boilerplate_REST.Business.Services.Interfaces;
+using Boilerplate_REST.Data.Contexts;
+using Boilerplate_REST.Data.Interfaces;
+using Boilerplate_REST.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +43,7 @@ namespace Boilerplate
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
+            services.AddTransient(typeof(IBookService), typeof(BookService));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
