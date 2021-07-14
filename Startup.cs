@@ -28,7 +28,11 @@ namespace Boilerplate
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
+            //Database Connection String
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //Uncomment if you don't want to configure a local/cloud db
+            // services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
 
             //Initialize Automapper
             var mapperConfig = new MapperConfiguration(mc =>
