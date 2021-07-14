@@ -14,10 +14,10 @@
 If error with omnisharp on ubuntu add a symlink : 
 https://github.com/OmniSharp/omnisharp-vscode/issues/4201
 
-# TO RUN
+# To run
 dotnet run
 
-# TO DO
+# To do
 - Authentification(jwt, google, facebook)
 - Add logging Services
 - Add configuration files to get the constants
@@ -31,8 +31,9 @@ dotnet run
 
  # Database configuration 
 
- you can use Db in memory ( see startup) or config your own db localy or in the cloud. I use Microsoft sql server is used.
+ you can use Db in memory ( see startup) or config your own db localy or in the cloud. I use Microsoft sql server.
 
+ for Ubuntu : 
  - https://docs.microsoft.com/fr-fr/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-ver15
 
 `systemctl status mssql-server --no-pager` to see if microsoft sql server is launch
