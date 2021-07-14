@@ -18,8 +18,6 @@ https://github.com/OmniSharp/omnisharp-vscode/issues/4201
 dotnet run
 
 # TO DO
-
-- Connect to db
 - Authentification(jwt, google, facebook)
 - Add logging Services
 - Add configuration files to get the constants
@@ -41,8 +39,13 @@ dotnet run
 
 ## EF migration 
 
--  dotnet tool install --global dotnet-ef
-- dotnet tool update --global dotnet-ef
-- 
+You must configure a valid connection string in appsetting.json
+
+- dotnet tool install --global dotnet-ef // install the tools
+- dotnet ef migrations add InitialCreate // generate .SQL in Migration folder upon your models  
+- dotnet ef database update // run the SQL files just created
+
+And the migration(Here the db is created)
+
 
 
