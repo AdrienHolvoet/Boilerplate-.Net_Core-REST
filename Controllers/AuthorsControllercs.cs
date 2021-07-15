@@ -5,6 +5,7 @@ using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
 using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Boilerplate_REST.Controllers
 {
@@ -15,9 +16,10 @@ namespace Boilerplate_REST.Controllers
     {
         private IAuthorService _authorService;
 
-        public AuthorsController(IMapper mapperService, IAuthorService service) : base(mapperService, service)
+        public AuthorsController(IMapper mapperService, ILogger<AuthorsController> logger, IAuthorService service) : base(mapperService, logger, service)
         {
             _authorService = service;
+            _logger = logger;
         }
 
         [HttpGet("name/{authorName}")]
@@ -31,7 +33,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }

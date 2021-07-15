@@ -3,6 +3,7 @@ using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
 using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Boilerplate_REST.Controllers
 {
@@ -10,8 +11,8 @@ namespace Boilerplate_REST.Controllers
     [Route("api/[controller]")]
     public class BooksController : BaseCrudController<BookDto, BookDto, Book>
     {
-        IBookService _bookService;
-        public BooksController(IMapper mapperService, IBookService bookService) : base(mapperService, bookService)
+        private IBookService _bookService;
+        public BooksController(IMapper mapperService, ILogger<BooksController> logger, IBookService bookService) : base(mapperService, logger, bookService)
         {
             _bookService = bookService;
         }

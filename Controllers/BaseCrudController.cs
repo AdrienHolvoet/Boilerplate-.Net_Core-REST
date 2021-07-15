@@ -5,6 +5,7 @@ using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
 using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Boilerplate_REST.Controllers
 {
@@ -14,9 +15,11 @@ namespace Boilerplate_REST.Controllers
         where TEntity : BaseEntity
     {
         protected IBaseService<TEntity> _service;
-        public BaseCrudController(IMapper mapperService, IBaseService<TEntity> service) : base(mapperService)
+
+        public BaseCrudController(IMapper mapperService, ILogger logger, IBaseService<TEntity> service) : base(mapperService, logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         // GET: api/{entity}
@@ -31,14 +34,14 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
 
         // GET api/{entity}/5
         [HttpGet("{id}")]
-        public virtual IActionResult Get(Guid id, string language = "en")
+        public virtual IActionResult Get(Guid id)
         {
             try
             {
@@ -53,7 +56,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -79,6 +82,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -115,7 +119,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -138,6 +142,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -151,6 +156,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -179,6 +185,7 @@ namespace Boilerplate_REST.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
