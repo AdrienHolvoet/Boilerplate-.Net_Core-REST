@@ -29,8 +29,7 @@ Via Visual Studio
 
 # To do
 - Authentification(jwt, google, facebook)
-- Add logging Services
-- Add configuration files to get the constants
+- Add configuration files to get the constants // maybe no need
 
 
 # Architecture

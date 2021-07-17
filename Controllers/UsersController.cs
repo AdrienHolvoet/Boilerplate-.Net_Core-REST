@@ -9,9 +9,9 @@ namespace Boilerplate_REST.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BooksController : BaseCrudController<BookDto, BookDto, Book>
+    public class UsersController : BaseCrudController<UserRequestDto, UserResponseDto, User>
     {
-        public BooksController(IMapper mapperService, ILogger<BooksController> logger, IBookService bookService) : base(mapperService, logger, bookService)
+        public UsersController(IMapper mapperService, ILogger<UsersController> logger, IBaseService<User> userService) : base(mapperService, logger, userService)
         {
 
         }

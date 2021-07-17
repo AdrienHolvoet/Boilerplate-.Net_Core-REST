@@ -67,7 +67,6 @@ namespace Boilerplate_REST.Controllers
         {
             try
             {
-
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
