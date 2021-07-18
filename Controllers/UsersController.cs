@@ -11,7 +11,7 @@ namespace Boilerplate_REST.Controllers
     [Route("api/[controller]")]
     public class UsersController : BaseCrudController<UserRequestDto, UserResponseDto, User>
     {
-        public UsersController(IMapper mapperService, ILogger<UsersController> logger, IBaseService<User> userService) : base(mapperService, logger, userService)
+        public UsersController(IMapper mapperService, ILogger<UsersController> logger, IBaseService<User> userService) : base(mapperService, logger, userService,"")
         {
 
         }

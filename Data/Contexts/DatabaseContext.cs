@@ -9,7 +9,6 @@ namespace Boilerplate_REST.Data.Contexts
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
-
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)

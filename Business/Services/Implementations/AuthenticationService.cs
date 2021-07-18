@@ -39,7 +39,7 @@ namespace Boilerplate_REST.Business.Services.Implementations
             {
                 return null;
             }
-            return _userService.Get(u => u.RefreshToken.Token == requestDto.RefreshToken).SingleOrDefault();
+            return _userService.Get(u => u.RefreshToken.Token == requestDto.RefreshToken, false, "RefreshToken").SingleOrDefault();
         }
 
         public string GetToken(User user)

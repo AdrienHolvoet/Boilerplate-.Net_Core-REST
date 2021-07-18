@@ -18,7 +18,7 @@ namespace Boilerplate_REST.Controllers
     {
         private IAuthorService _authorService;
 
-        public AuthorsController(IMapper mapperService, ILogger<AuthorsController> logger, IAuthorService service) : base(mapperService, logger, service)
+        public AuthorsController(IMapper mapperService, ILogger<AuthorsController> logger, IAuthorService service) : base(mapperService, logger, service, "Books")
         {
             _authorService = service;
             _logger = logger;

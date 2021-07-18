@@ -15,11 +15,13 @@ namespace Boilerplate_REST.Controllers
         where TEntity : BaseEntity
     {
         protected IBaseService<TEntity> _service;
+        protected string _includedEntites;
 
-        public BaseCrudController(IMapper mapperService, ILogger logger, IBaseService<TEntity> service) : base(mapperService, logger)
+        public BaseCrudController(IMapper mapperService, ILogger logger, IBaseService<TEntity> service, string includedEntities) : base(mapperService, logger)
         {
             _service = service;
             _logger = logger;
+            _includedEntites = includedEntities;
         }
 
         // GET: api/{entity}
@@ -28,7 +30,7 @@ namespace Boilerplate_REST.Controllers
         {
             try
             {
-                var list = _service.GetAll();
+                var list = _service.Get(null, false, _includedEntites);
 
                 return Ok(_mapperService.Map<List<TResponseDto>>(list));
             }

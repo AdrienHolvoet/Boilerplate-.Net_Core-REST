@@ -36,7 +36,7 @@ namespace Boilerplate_REST.Business.Services.Implementations
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
                 _configuration["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(120),
+                expires: DateTime.Now.AddMinutes(Authentication.TOKEN_DURATION),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -58,7 +58,7 @@ namespace Boilerplate_REST.Controllers
                 if (existingUser == null)
                     return NotFound("User not found.");
 
-                if (existingUser.RefreshToken.IsExpired)
+                if (existingUser.RefreshToken == null || existingUser.RefreshToken.IsExpired)
                     return Unauthorized("Invalid token.");
 
                 //Regenerate the Token and RefreshToken

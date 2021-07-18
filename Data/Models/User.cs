@@ -14,6 +14,7 @@ namespace Boilerplate_REST.Data.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public RefreshToken RefreshToken { get; set; }
+
+        public virtual RefreshToken RefreshToken { get; set; }
     }
 }
