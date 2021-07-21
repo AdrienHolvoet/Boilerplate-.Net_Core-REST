@@ -7,7 +7,5 @@ namespace Boilerplate_REST.Business.Services.Interfaces
     public interface IJwtService
     {
         public string GenerateJwtToken(User user);
-
-        public RefreshToken GenerateRefreshToken(string ipAddress);
     }
 }

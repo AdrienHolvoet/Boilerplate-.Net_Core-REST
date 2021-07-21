@@ -16,7 +16,7 @@ namespace Boilerplate_REST.Controllers
     [Route("api/[controller]")]
     public class AuthorsController : BaseCrudController<AuthorDto, AuthorDto, Author>
     {
-        private IAuthorService _authorService;
+        private readonly IAuthorService _authorService;
 
         public AuthorsController(IMapper mapperService, ILogger<AuthorsController> logger, IAuthorService service) : base(mapperService, logger, service, "Books")
         {

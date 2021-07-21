@@ -11,9 +11,10 @@ namespace Boilerplate_REST.Controllers
     [Route("api/[controller]")]
     public class BooksController : BaseCrudController<BookDto, BookDto, Book>
     {
-        public BooksController(IMapper mapperService, ILogger<BooksController> logger, IBookService bookService) : base(mapperService, logger, bookService,"")
+        public BooksController(IMapper mapperService, ILogger<BooksController> logger, IBookService bookService) : base(mapperService, logger, bookService, "")
         {
 
         }
+
     }
 }

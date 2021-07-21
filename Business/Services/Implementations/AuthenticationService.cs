@@ -1,11 +1,14 @@
 
 
+using AutoMapper;
 using Boilerplate.Business.Constants;
 using Boilerplate.Business.DTOs.Authentication;
+using Boilerplate.Business.Utilities;
 using Boilerplate.Data.Models;
 using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
 using Boilerplate_REST.Data.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
@@ -16,12 +19,15 @@ namespace Boilerplate_REST.Business.Services.Implementations
     {
         private readonly IJwtService _jwtService;
         private readonly IUserService _userService;
+        private readonly IConfiguration _configuration;
+        private readonly IMapper _mapperService;
 
-
-        public AuthenticationService(IJwtService jwtService, IUserService userService)
+        public AuthenticationService(IJwtService jwtService, IUserService userService, IConfiguration configuration, IMapper mapperService)
         {
             _userService = userService;
+            _configuration = configuration;
             _jwtService = jwtService;
+            _mapperService = mapperService;
         }
 
         public User Authenticate(AuthenticateRequestDto requestDto)
@@ -30,8 +36,11 @@ namespace Boilerplate_REST.Business.Services.Implementations
             {
                 return null;
             }
-            return _userService.Get(x => x.Email == requestDto.Email && x.Password == requestDto.Password).SingleOrDefault();
+            string hashedPassword = this.HashPassword(requestDto.Email, requestDto.Password);
+
+            return _userService.Get(x => x.Email == requestDto.Email && x.Password == hashedPassword).SingleOrDefault();
         }
+
 
         public User RefreshToken(RefreshTokenRequestDto requestDto)
         {
@@ -44,25 +53,22 @@ namespace Boilerplate_REST.Business.Services.Implementations
 
         public string GetToken(User user)
         {
-
-            user.RefreshToken = generateRefreshToken();
+            user.RefreshToken = GenerateRefreshToken();
             user = _userService.Update(user);
             _userService.SaveChanges();
             return _jwtService.GenerateJwtToken(user);
         }
-        public string getRefreshToken(User user)
+
+        public string GetRefreshToken(User user)
         {
 
-            user.RefreshToken = generateRefreshToken();
+            user.RefreshToken = GenerateRefreshToken();
             user = _userService.Update(user);
             _userService.SaveChanges();
             return _jwtService.GenerateJwtToken(user);
         }
 
-
-
-
-        private RefreshToken generateRefreshToken()
+        private static RefreshToken GenerateRefreshToken()
         {
             using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
             var randomBytes = new byte[64];
@@ -72,6 +78,21 @@ namespace Boilerplate_REST.Business.Services.Implementations
                 Token = Convert.ToBase64String(randomBytes),
                 Expires = DateTime.UtcNow.AddDays(Authentication.REFRESH_TOKEN_DURATION),
             };
+        }
+
+        public User AddUser(UserRequestDto requestDto)
+        {
+            var newUser = _mapperService.Map<User>(requestDto);
+            newUser.Password = this.HashPassword(requestDto.Email, requestDto.Password);
+
+            _userService.Add(newUser);
+            _userService.SaveChanges();
+            return newUser;
+        }
+
+        public string HashPassword(string email, string password)
+        {
+            return SecurityUtility.GetHashString(password + _configuration["Jwt:Key"] + email);
         }
     }
 }

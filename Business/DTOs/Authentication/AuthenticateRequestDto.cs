@@ -8,6 +8,7 @@ namespace Boilerplate_REST.Business.DTOs
     public class AuthenticateRequestDto
     {
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

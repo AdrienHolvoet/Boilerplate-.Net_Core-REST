@@ -9,5 +9,6 @@ namespace Boilerplate_REST.Business.Services.Interfaces
         public User Authenticate(AuthenticateRequestDto requestDto);
         public User RefreshToken(RefreshTokenRequestDto token);
         public string GetToken(User user);
+        public User AddUser(UserRequestDto requestDto);
     }
 }

@@ -41,10 +41,5 @@ namespace Boilerplate_REST.Business.Services.Implementations
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        public RefreshToken GenerateRefreshToken(string ipAddress)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -2,12 +2,10 @@ using AutoMapper;
 using Boilerplate.Business.DTOs.Authentication;
 using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 
 namespace Boilerplate_REST.Controllers
 {
@@ -15,7 +13,7 @@ namespace Boilerplate_REST.Controllers
     [Route("api/[controller]")]
     public class AuthenticationController : BaseController
     {
-        private IAuthenticationService _authenticationService;
+        private readonly IAuthenticationService _authenticationService;
         public AuthenticationController(IMapper mapperService, ILogger<AuthenticationController> logger, IAuthenticationService authenticationService) : base(mapperService, logger)
         {
             _authenticationService = authenticationService;
@@ -73,9 +71,6 @@ namespace Boilerplate_REST.Controllers
                 _logger.LogError(ex.ToString());
                 return BadRequest(ex.Message);
             }
-
         }
-
-
     }
 }

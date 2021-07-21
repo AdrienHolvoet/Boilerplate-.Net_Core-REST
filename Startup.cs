@@ -46,6 +46,7 @@ namespace Boilerplate
             {
                 mc.AddProfile(new MappingProfile());
             });
+
             IMapper mapper = mapperConfig.CreateMapper();
 
             /*Transient objects are always different; a new instance is provided to every controller and every service. 
@@ -56,8 +57,8 @@ namespace Boilerplate
             services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddTransient(typeof(IBookService), typeof(BookService));
             services.AddTransient(typeof(IAuthorService), typeof(AuthorService));
-            services.AddTransient(typeof(IUserService), typeof(UserService));
             services.AddTransient(typeof(IAuthenticationService), typeof(AuthenticationService));
+            services.AddTransient(typeof(IUserService), typeof(UserService));
             services.AddTransient(typeof(IJwtService), typeof(JwtService));
             services.AddControllers();
             services.AddSwaggerGen(c =>
