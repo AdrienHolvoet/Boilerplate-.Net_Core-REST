@@ -17,25 +17,5 @@ namespace Boilerplate_REST.Controllers
         {
             _authenticationService = authenticationService;
         }
-
-        [HttpPost]
-        public override IActionResult Post([FromBody] UserRequestDto requestDto)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                var newUser = _authenticationService.AddUser(requestDto);
-
-                return Ok(_mapperService.Map<UserResponseDto>(newUser));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

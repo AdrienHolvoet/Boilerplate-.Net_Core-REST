@@ -72,5 +72,27 @@ namespace Boilerplate_REST.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpPost("registration")]
+        public IActionResult Registration([FromBody] UserRequestDto requestDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var newUser = _authenticationService.AddUser(requestDto);
+
+                return Ok(_mapperService.Map<UserResponseDto>(newUser));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

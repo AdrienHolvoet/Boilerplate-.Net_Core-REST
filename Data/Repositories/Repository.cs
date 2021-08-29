@@ -49,7 +49,7 @@ namespace Boilerplate_REST.Data.Repositories
         }
         public T Insert(T entity)
         {
-            if (entity == null) throw new ArgumentNullException("entity");
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             var currentDate = DateTime.Now;
             entity.CreatedAt = currentDate;
