@@ -1,19 +1,10 @@
 
 
-using AutoMapper;
-using Boilerplate.Business.Constants;
-using Boilerplate.Business.DTOs.Authentication;
+
 using Boilerplate.Business.ExternalDtos.Facebook;
 using Boilerplate.Business.Services.Interfaces;
-using Boilerplate.Business.Utilities;
-using Boilerplate.Data.Models;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 

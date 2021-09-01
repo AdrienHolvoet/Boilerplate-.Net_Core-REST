@@ -4,11 +4,12 @@ using AutoMapper;
 using Boilerplate.Business.Constants;
 using Boilerplate.Business.DTOs.Authentication;
 using Boilerplate.Business.Services.Interfaces;
-using Boilerplate.Business.Utilities;
 using Boilerplate.Data.Models;
+using Boilerplate.Helpers;
 using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
 using Boilerplate_REST.Data.Models;
+using Google.Apis.Auth;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -115,7 +116,7 @@ namespace Boilerplate_REST.Business.Services.Implementations
             if (user == null)
             {
                 //register him
-                var newUser = new User
+                user = new User
                 {
                     Id = Guid.NewGuid(),
                     Email = userInfo.Email,
@@ -124,8 +125,31 @@ namespace Boilerplate_REST.Business.Services.Implementations
                     Password = ""
                 };
 
-                newUser.Password = this.HashPassword(newUser.Email, newUser.Password);
-                _userService.Add(newUser);
+                user.Password = this.HashPassword(user.Email, user.Password);
+                _userService.Add(user);
+                _userService.SaveChanges();
+            }
+            return user;
+        }
+
+        public User AuthenticateWithGoogleAsync(GoogleJsonWebSignature.Payload payload)
+        {
+            var user = _userService.Get(x => x.Email == payload.Email && x.Password == this.HashPassword(payload.Email, " ")).SingleOrDefault();
+
+            if (user == null)
+            {
+                //register him
+                user = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Email = payload.Email,
+                    FirstName = payload.GivenName,
+                    LastName = payload.FamilyName,
+                    Password = " "
+                };
+
+                user.Password = this.HashPassword(user.Email, user.Password);
+                _userService.Add(user);
                 _userService.SaveChanges();
             }
             return user;

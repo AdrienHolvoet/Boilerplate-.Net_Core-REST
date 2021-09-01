@@ -2,7 +2,7 @@
 using System.Text;
 
 
-namespace Boilerplate.Business.Utilities
+namespace Boilerplate.Helpers
 {
     public class SecurityUtility
     {

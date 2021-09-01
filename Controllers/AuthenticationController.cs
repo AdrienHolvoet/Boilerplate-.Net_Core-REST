@@ -2,6 +2,7 @@ using AutoMapper;
 using Boilerplate.Business.DTOs.Authentication;
 using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Business.Services.Interfaces;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -52,14 +53,14 @@ namespace Boilerplate_REST.Controllers
         {
             try
             {
-                var existingUser = await _authenticationService.AuthenticateWithFacebookAsync(accesToken);
+                var user = await _authenticationService.AuthenticateWithFacebookAsync(accesToken);
 
-                if (existingUser == null)
+                if (user == null)
                     return Unauthorized("Invalid token.");
 
                 //Generate the Token and RefreshToken
-                var token = _authenticationService.GetToken(existingUser);
-                var response = _mapperService.Map<AuthenticateResponseDto>(existingUser);
+                var token = _authenticationService.GetToken(user);
+                var response = _mapperService.Map<AuthenticateResponseDto>(user);
                 response.Token = token;
 
                 return Ok(response);
@@ -72,7 +73,32 @@ namespace Boilerplate_REST.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpPost("authenticate/google")]
+        public IActionResult GoogleAuthenticate([FromBody] string tokenId)
+        {
+            try
+            {
+                var payload = GoogleJsonWebSignature.ValidateAsync(tokenId, new GoogleJsonWebSignature.ValidationSettings()).Result;
+                var user = _authenticationService.AuthenticateWithGoogleAsync(payload);
 
+                if (user == null)
+                    return Unauthorized("Invalid token.");
+
+                //Generate the Token and RefreshToken
+                var token = _authenticationService.GetToken(user);
+                var response = _mapperService.Map<AuthenticateResponseDto>(user);
+                response.Token = token;
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(ex.Message);
+            }
+
+        }
 
         [AllowAnonymous]
         [HttpPost("refresh-token")]

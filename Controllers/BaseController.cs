@@ -1,6 +1,9 @@
 using AutoMapper;
+using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Security.Claims;
 
 namespace Boilerplate_REST.Controllers
 {
@@ -14,6 +17,14 @@ namespace Boilerplate_REST.Controllers
         {
             _mapperService = mapperService;
             _logger = logger;
+        }
+
+        /// <summary>Get the Guid of the current connected user.</summary>
+        protected Guid GetAuthenticatedIdentity()
+        {
+            var guid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            return Guid.Parse(guid);
         }
 
     }

@@ -1,6 +1,7 @@
 using Boilerplate.Business.DTOs.Authentication;
 using Boilerplate_REST.Business.DTOs;
 using Boilerplate_REST.Data.Models;
+using Google.Apis.Auth;
 using System.Threading.Tasks;
 
 namespace Boilerplate_REST.Business.Services.Interfaces
@@ -12,5 +13,6 @@ namespace Boilerplate_REST.Business.Services.Interfaces
         public string GetToken(User user);
         public User AddUser(UserRequestDto requestDto);
         public Task<User> AuthenticateWithFacebookAsync(string token);
+        public User AuthenticateWithGoogleAsync(GoogleJsonWebSignature.Payload payload);
     }
 }

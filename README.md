@@ -16,7 +16,7 @@ If error with omnisharp on ubuntu add a symlink :
 https://github.com/OmniSharp/omnisharp-vscode/issues/4201
 
 ## For Windows and Mac : 
-Just install Visual Studio et install the package via NuGet package manager
+Just install Visual Studio et install the packages via NuGet package manager
 
 # To run
 
@@ -28,7 +28,6 @@ dotnet run
 Via Visual Studio
 
 # To do
-- Authentification(jwt, google, facebook)
 - Add configuration files to get the constants // maybe no need
 
 
