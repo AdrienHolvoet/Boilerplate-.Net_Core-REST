@@ -49,12 +49,13 @@ for Ubuntu :
 # EF migration 
 
 You must configure a valid connection string in appsetting.json
+And the migration (the db is created if it's the first time)
 
 - dotnet tool install --global dotnet-ef // install the tools
 - dotnet ef migrations add InitialCreate // generate .SQL in Migration folder upon your models  
 - dotnet ef database update // run the SQL files just created
 
-And the migration (the db is created if it's the first time)
+
 
 
 

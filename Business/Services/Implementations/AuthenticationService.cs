@@ -3,6 +3,7 @@
 using AutoMapper;
 using Boilerplate.Business.Constants;
 using Boilerplate.Business.DTOs.Authentication;
+using Boilerplate.Business.Services.Interfaces;
 using Boilerplate.Business.Utilities;
 using Boilerplate.Data.Models;
 using Boilerplate_REST.Business.DTOs;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace Boilerplate_REST.Business.Services.Implementations
 {
@@ -21,13 +23,15 @@ namespace Boilerplate_REST.Business.Services.Implementations
         private readonly IUserService _userService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapperService;
+        private readonly IFbAuthenticationService _fbAuthenticationService;
 
-        public AuthenticationService(IJwtService jwtService, IUserService userService, IConfiguration configuration, IMapper mapperService)
+        public AuthenticationService(IFbAuthenticationService fbAuthenticationService, IJwtService jwtService, IUserService userService, IConfiguration configuration, IMapper mapperService)
         {
             _userService = userService;
             _configuration = configuration;
             _jwtService = jwtService;
             _mapperService = mapperService;
+            _fbAuthenticationService = fbAuthenticationService;
         }
 
         public User Authenticate(AuthenticateRequestDto requestDto)
@@ -93,6 +97,38 @@ namespace Boilerplate_REST.Business.Services.Implementations
         public string HashPassword(string email, string password)
         {
             return SecurityUtility.GetHashString(password + _configuration["Jwt:Key"] + email);
+        }
+
+        public async Task<User> AuthenticateWithFacebookAsync(string accesToken)
+        {
+            var validateTokenResult = await _fbAuthenticationService.ValidateAccessTokenAsync(accesToken);
+
+            if (!validateTokenResult.Data.IsValid)
+            {
+                return null;
+            }
+
+            var userInfo = await _fbAuthenticationService.GetUserInfoResultAsync(accesToken);
+
+            var user = _userService.Get(x => x.Email == userInfo.Email && x.Password == this.HashPassword(userInfo.Email, "")).SingleOrDefault();
+
+            if (user == null)
+            {
+                //register him
+                var newUser = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Email = userInfo.Email,
+                    FirstName = userInfo.FirstName,
+                    LastName = userInfo.LastName,
+                    Password = ""
+                };
+
+                newUser.Password = this.HashPassword(newUser.Email, newUser.Password);
+                _userService.Add(newUser);
+                _userService.SaveChanges();
+            }
+            return user;
         }
     }
 }

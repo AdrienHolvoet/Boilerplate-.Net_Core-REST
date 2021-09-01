@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace Boilerplate_REST.Controllers
 {
@@ -44,6 +45,34 @@ namespace Boilerplate_REST.Controllers
             }
 
         }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate/facebook")]
+        public async Task<IActionResult> FacebookAuthenticate([FromBody] string accesToken)
+        {
+            try
+            {
+                var existingUser = await _authenticationService.AuthenticateWithFacebookAsync(accesToken);
+
+                if (existingUser == null)
+                    return Unauthorized("Invalid token.");
+
+                //Generate the Token and RefreshToken
+                var token = _authenticationService.GetToken(existingUser);
+                var response = _mapperService.Map<AuthenticateResponseDto>(existingUser);
+                response.Token = token;
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
 
         [AllowAnonymous]
         [HttpPost("refresh-token")]

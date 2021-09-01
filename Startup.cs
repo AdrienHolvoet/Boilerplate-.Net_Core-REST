@@ -1,4 +1,5 @@
 using AutoMapper;
+using Boilerplate.Business.Services.Interfaces;
 using Boilerplate_REST.Business.Mappers;
 using Boilerplate_REST.Business.Services.Implementations;
 using Boilerplate_REST.Business.Services.Interfaces;
@@ -51,6 +52,7 @@ namespace Boilerplate
             /*Transient objects are always different; a new instance is provided to every controller and every service. 
             Scoped objects are the same within a request, but different across different requests. 
             Singleton objects are the same for every object and every request.*/
+            services.AddHttpClient();
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
@@ -59,6 +61,7 @@ namespace Boilerplate
             services.AddTransient(typeof(IAuthenticationService), typeof(AuthenticationService));
             services.AddTransient(typeof(IUserService), typeof(UserService));
             services.AddTransient(typeof(IJwtService), typeof(JwtService));
+            services.AddTransient(typeof(IFbAuthenticationService), typeof(FbAuthenticationService));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

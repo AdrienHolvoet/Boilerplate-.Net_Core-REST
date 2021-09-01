@@ -13,5 +13,12 @@ namespace Boilerplate_REST.Data.Contexts
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //To put the email has unique key
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.Email);
+        }
     }
 }
