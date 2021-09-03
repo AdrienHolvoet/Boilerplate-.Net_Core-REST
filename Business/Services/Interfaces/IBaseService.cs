@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Data.Models;
 
-namespace Boilerplate_REST.Business.Services.Interfaces
+namespace Boilerplate.Business.Services.Interfaces
 {
     public interface IBaseService<T> where T : BaseEntity
     {
@@ -11,8 +11,7 @@ namespace Boilerplate_REST.Business.Services.Interfaces
         /// Get a selected entity by using a linq expression filter
         /// </summary>
         /// <param name="filter">linq expression filter</param>
-        T GetSingle(Expression<Func<T, bool>> filter = null,
-            string includeProperties = "");
+        T GetSingle(Expression<Func<T, bool>> filter = null, bool includeDisabled = false, string includeProperties = "");
 
         /// <summary>
         /// Get a selected entity by the object primary key ID

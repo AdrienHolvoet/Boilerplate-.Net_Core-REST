@@ -1,10 +1,10 @@
-using Boilerplate.Business.DTOs.Authentication;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Business.Dtos;
+using Boilerplate.Business.Dtos.Authentication;
+using Boilerplate.Data.Models;
 using Google.Apis.Auth;
 using System.Threading.Tasks;
 
-namespace Boilerplate_REST.Business.Services.Interfaces
+namespace Boilerplate.Business.Services.Interfaces
 {
     public interface IAuthenticationService
     {

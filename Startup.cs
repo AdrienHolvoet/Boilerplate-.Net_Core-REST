@@ -1,11 +1,10 @@
 using AutoMapper;
 using Boilerplate.Business.Services.Interfaces;
-using Boilerplate_REST.Business.Mappers;
-using Boilerplate_REST.Business.Services.Implementations;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Contexts;
-using Boilerplate_REST.Data.Interfaces;
-using Boilerplate_REST.Data.Repositories;
+using Boilerplate.Business.Mappers;
+using Boilerplate.Business.Services.Implementations;
+using Boilerplate.Data.Contexts;
+using Boilerplate.Data.Interfaces;
+using Boilerplate.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,11 +55,11 @@ namespace Boilerplate
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
-            services.AddTransient(typeof(IBookService), typeof(BookService));
-            services.AddTransient(typeof(IAuthorService), typeof(AuthorService));
+
+            services.AddTransient(typeof(IRecipeService), typeof(RecipeService));
             services.AddTransient(typeof(IAuthenticationService), typeof(AuthenticationService));
-            services.AddTransient(typeof(IUserService), typeof(UserService));
             services.AddTransient(typeof(IJwtService), typeof(JwtService));
+            services.AddTransient(typeof(IImageService), typeof(ImageService));
             services.AddTransient(typeof(IFbAuthenticationService), typeof(FbAuthenticationService));
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -2,31 +2,30 @@
 
 using AutoMapper;
 using Boilerplate.Business.Constants;
-using Boilerplate.Business.DTOs.Authentication;
 using Boilerplate.Business.Services.Interfaces;
 using Boilerplate.Data.Models;
 using Boilerplate.Helpers;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Models;
+
 using Google.Apis.Auth;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Boilerplate.Business.Dtos.Authentication;
+using Boilerplate.Business.Dtos;
 
-namespace Boilerplate_REST.Business.Services.Implementations
+namespace Boilerplate.Business.Services.Implementations
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IJwtService _jwtService;
-        private readonly IUserService _userService;
+        private readonly IBaseService<User> _userService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapperService;
         private readonly IFbAuthenticationService _fbAuthenticationService;
 
-        public AuthenticationService(IFbAuthenticationService fbAuthenticationService, IJwtService jwtService, IUserService userService, IConfiguration configuration, IMapper mapperService)
+        public AuthenticationService(IFbAuthenticationService fbAuthenticationService, IJwtService jwtService, IBaseService<User> userService, IConfiguration configuration, IMapper mapperService)
         {
             _userService = userService;
             _configuration = configuration;

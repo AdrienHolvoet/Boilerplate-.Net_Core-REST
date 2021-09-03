@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Data.Models;
 
-namespace Boilerplate_REST.Business.DTOs
+namespace Boilerplate.Business.Dtos
 {
     public class AuthenticateRequestDto
     {

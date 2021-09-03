@@ -1,11 +1,10 @@
 using AutoMapper;
-using Boilerplate_REST.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
 
-namespace Boilerplate_REST.Controllers
+namespace Boilerplate.Controllers
 {
     [ApiController]
     public class BaseController : Controller
@@ -20,6 +19,7 @@ namespace Boilerplate_REST.Controllers
         }
 
         /// <summary>Get the Guid of the current connected user.</summary>
+        /// Or just use var currentUser = HttpContext.User;
         protected Guid GetAuthenticatedIdentity()
         {
             var guid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

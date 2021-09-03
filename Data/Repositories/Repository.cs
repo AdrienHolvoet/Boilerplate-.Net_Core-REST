@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Boilerplate_REST.Data.Contexts;
-using Boilerplate_REST.Data.Interfaces;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Data.Contexts;
+using Boilerplate.Data.Interfaces;
+using Boilerplate.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Boilerplate_REST.Data.Repositories
+namespace Boilerplate.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
@@ -76,25 +76,34 @@ namespace Boilerplate_REST.Data.Repositories
 
         public virtual T Update(T entityToUpdate)
         {
-
-            if (entityToUpdate == null) throw new ArgumentNullException("entity");
+            if (entityToUpdate == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            var entry = _context.Entry<T>(entityToUpdate);
 
             T entity = this.GetById(entityToUpdate.Id);  // You need to have access to key
 
             entityToUpdate.CreatedAt = entity.CreatedAt;
             entityToUpdate.UpdatedAt = DateTime.Now;
-            _context.Entry(entity).CurrentValues.SetValues(entityToUpdate);
+            entry.CurrentValues.SetValues(entityToUpdate);
+
 
             return entityToUpdate;
         }
         public virtual void Delete(Guid id)
         {
-            T entity = dbSet.SingleOrDefault(s => s.Id == id);
+            T entity = this.GetById(id);
             dbSet.Remove(entity);
         }
 
         public virtual void Delete(T entityToDelete)
         {
+
+            if (_context.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+            }
             dbSet.Remove(entityToDelete);
         }
 
@@ -116,7 +125,10 @@ namespace Boilerplate_REST.Data.Repositories
         }
 
         public virtual void Commit()
-        { _context.SaveChanges(); }
+        {
+            _context.SaveChanges();
+
+        }
 
         public virtual void Rollback()
         { _context.Dispose(); }

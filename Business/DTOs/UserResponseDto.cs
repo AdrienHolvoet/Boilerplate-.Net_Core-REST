@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Boilerplate_REST.Business.DTOs
+namespace Boilerplate.Business.Dtos
 {
     public class UserResponseDto : BaseDto
     {

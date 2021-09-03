@@ -1,21 +1,19 @@
 using AutoMapper;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Business.Dtos;
+using Boilerplate.Business.Services.Interfaces;
+using Boilerplate.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 
-namespace Boilerplate_REST.Controllers
+namespace Boilerplate.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : BaseCrudController<UserRequestDto, UserResponseDto, User>
     {
-        private readonly IAuthenticationService _authenticationService;
-        public UsersController(IMapper mapperService, ILogger<UsersController> logger, IBaseService<User> userService, IAuthenticationService authenticationService) : base(mapperService, logger, userService, "")
+        public UsersController(IMapper mapperService, ILogger<UsersController> logger, IBaseService<User> userService) : base(mapperService, logger, userService, "")
         {
-            _authenticationService = authenticationService;
+
         }
     }
 }

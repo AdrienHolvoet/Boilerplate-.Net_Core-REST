@@ -2,8 +2,8 @@ using Boilerplate.Data.Models;
 
 namespace Boilerplate.Business.Services.Interfaces
 {
-    public interface IJwtService
+    public interface IRecipeService : IBaseService<Recipe>
     {
-        public string GenerateJwtToken(User user);
+
     }
 }

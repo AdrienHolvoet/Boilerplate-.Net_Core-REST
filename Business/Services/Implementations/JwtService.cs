@@ -1,8 +1,6 @@
 using Boilerplate.Business.Constants;
 using Boilerplate.Data.Models;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Business.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -10,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Boilerplate_REST.Business.Services.Implementations
+namespace Boilerplate.Business.Services.Implementations
 {
     public class JwtService : IJwtService
     {

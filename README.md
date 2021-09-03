@@ -45,6 +45,12 @@ for Ubuntu :
  - https://docs.microsoft.com/fr-fr/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-ver15  
  `systemctl status mssql-server --no-pager` to see if microsoft sql server is launch
 
+ # For Storage 
+
+https://stackoverflow.com/questions/39650052/storing-images-sql-db-vs-azure-blob-storage
+
+
+
 # EF migration 
 
 You must configure a valid connection string in appsetting.json
@@ -53,6 +59,33 @@ And the migration (the db is created if it's the first time)
 - dotnet tool install --global dotnet-ef // install the tools
 - dotnet ef migrations add InitialCreate // generate .SQL in Migration folder upon your models  
 - dotnet ef database update // run the SQL files just created
+
+# Tips
+
+## Delete on cascade 
+You need to put the `Guid RecipeId` and  `Recipe Recipe` to allow the delete on cascade on the navigation property.
+
+If you don't put `Guid RecipeId` there will be no delete on cascade
+
+
+```
+  public class Recipe : BaseEntity
+    {
+        public string Title { get; set; }
+        public Image Image { get; set; }
+        public ICollection<Ingredient> Ingredients { get; set; }
+        public User User { get; set; }
+    }
+
+     public class Ingredient : BaseEntity
+    {
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public string Quantity { get; set; }
+        public Guid RecipeId { get; set; }
+        public Recipe Recipe { get; set; }
+    }
+```
 
 
 

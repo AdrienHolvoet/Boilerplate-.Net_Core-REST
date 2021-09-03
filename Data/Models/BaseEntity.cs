@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Boilerplate_REST.Data.Models
+namespace Boilerplate.Data.Models
 {
     public class BaseEntity
     {

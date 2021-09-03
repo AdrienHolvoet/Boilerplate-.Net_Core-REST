@@ -1,15 +1,15 @@
 using AutoMapper;
-using Boilerplate.Business.DTOs.Authentication;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Business.Services.Interfaces;
+using Boilerplate.Business.Services.Interfaces;
 using Google.Apis.Auth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Boilerplate.Business.Dtos.Authentication;
+using Boilerplate.Business.Dtos;
 
-namespace Boilerplate_REST.Controllers
+namespace Boilerplate.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Interfaces;
-using Boilerplate_REST.Data.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+
 
 /*namespace Boilerplate_REST.Controllers
 {

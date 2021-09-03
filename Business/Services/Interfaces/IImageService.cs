@@ -2,8 +2,9 @@ using Boilerplate.Data.Models;
 
 namespace Boilerplate.Business.Services.Interfaces
 {
-    public interface IJwtService
+    public interface IImageService : IBaseService<Image>
     {
-        public string GenerateJwtToken(User user);
+
     }
+    //TODO add business logic here
 }

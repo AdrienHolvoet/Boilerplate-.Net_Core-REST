@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Boilerplate_REST.Business.Services.Implementations
+namespace Boilerplate.Business.Services.Implementations
 {
     public class FbAuthenticationService : IFbAuthenticationService
     {

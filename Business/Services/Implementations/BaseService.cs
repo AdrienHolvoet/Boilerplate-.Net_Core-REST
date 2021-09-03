@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Interfaces;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Business.Services.Interfaces;
+using Boilerplate.Data.Interfaces;
+using Boilerplate.Data.Models;
 
-namespace Boilerplate_REST.Business.Services.Implementations
+namespace Boilerplate.Business.Services.Implementations
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntity
     {
@@ -102,11 +102,6 @@ namespace Boilerplate_REST.Business.Services.Implementations
         public T GetSingle(Expression<Func<T, bool>> filter = null, bool includeDisabled = false, string includeProperties = "")
         {
             return this.Get(filter, includeDisabled, includeProperties).SingleOrDefault();
-        }
-
-        public T GetSingle(Expression<Func<T, bool>> filter = null, string includeProperties = "")
-        {
-            throw new NotImplementedException();
         }
 
         public T GetSingleById(Guid id)

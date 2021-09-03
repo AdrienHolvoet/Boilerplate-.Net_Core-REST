@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
-using Boilerplate_REST.Business.DTOs;
-using Boilerplate_REST.Business.Services.Interfaces;
-using Boilerplate_REST.Data.Models;
+using Boilerplate.Business.Dtos;
+using Boilerplate.Business.Services.Interfaces;
+using Boilerplate.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Boilerplate_REST.Controllers
+namespace Boilerplate.Controllers
 {
     public class BaseCrudController<TRequestDto, TResponseDto, TEntity> : BaseController
         where TRequestDto : BaseDto
@@ -47,7 +48,7 @@ namespace Boilerplate_REST.Controllers
         {
             try
             {
-                var item = _service.GetSingleById(id);
+                var item = _service.Get(e => e.Id == id, false, _includedEntites).SingleOrDefault();
 
                 if (item == null)
                 {
@@ -131,7 +132,7 @@ namespace Boilerplate_REST.Controllers
         {
             try
             {
-                var oldItem = _service.GetSingleById(id);
+                var oldItem = _service.Get(e => e.Id == id, false, _includedEntites).SingleOrDefault();
 
                 if (oldItem == null)
                     return NotFound($"{typeof(TEntity).FullName} not found.");
@@ -139,7 +140,7 @@ namespace Boilerplate_REST.Controllers
                 _service.Delete(oldItem, true);
                 _service.SaveChanges();
 
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

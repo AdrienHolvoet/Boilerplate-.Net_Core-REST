@@ -2,7 +2,7 @@ using Boilerplate.Data.Models;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Boilerplate_REST.Data.Models
+namespace Boilerplate.Data.Models
 {
     public class User : BaseEntity
     {
@@ -15,7 +15,6 @@ namespace Boilerplate_REST.Data.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-
-        public virtual RefreshToken RefreshToken { get; set; }
+        public RefreshToken RefreshToken { get; set; }
     }
 }
