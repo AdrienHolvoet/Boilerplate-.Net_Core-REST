@@ -56,9 +56,16 @@ https://stackoverflow.com/questions/39650052/storing-images-sql-db-vs-azure-blob
 You must configure a valid connection string in appsetting.json
 And the migration (the db is created if it's the first time)
 
+With Developer Command Prompt :  
 - dotnet tool install --global dotnet-ef // install the tools
 - dotnet ef migrations add InitialCreate // generate .SQL in Migration folder upon your models  
 - dotnet ef database update // run the SQL files just created
+
+With Developer Command Prompt : 
+ - Add-Migration InitialCreate
+ - Update-Database
+
+See : https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs
 
 # Tips
 
