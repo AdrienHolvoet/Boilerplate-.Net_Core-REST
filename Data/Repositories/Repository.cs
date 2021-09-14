@@ -13,7 +13,7 @@ namespace Boilerplate.Data.Repositories
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly DatabaseContext _context;
-        private DbSet<T> dbSet;
+        private readonly DbSet<T> dbSet;
         public Repository(DatabaseContext context)
         {
             this._context = context;

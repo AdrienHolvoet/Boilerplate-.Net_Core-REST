@@ -33,8 +33,11 @@ namespace Boilerplate
             //Database Connection String
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options
-                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                //for pgsql db
+                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+
+                // use this when you have SQL server db
+                // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Uncomment if you don't want to configure a local/cloud db
