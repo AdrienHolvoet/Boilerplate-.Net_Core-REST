@@ -80,7 +80,7 @@ namespace Boilerplate.Controllers
                 _service.Add(item);
                 _service.SaveChanges();
 
-                return Ok(_mapperService.Map<TResponseDto>(item));
+                return CreatedAtAction("Get", new { id = item.Id },_mapperService.Map<TResponseDto>(item));
             }
             catch (Exception ex)
             {
@@ -183,7 +183,7 @@ namespace Boilerplate.Controllers
                 _service.Add(items);
                 _service.SaveChanges();
 
-                return Ok(_mapperService.Map<List<TResponseDto>>(items));
+                return CreatedAtAction("GetAll",_mapperService.Map<List<TResponseDto>>(items));
             }
             catch (Exception ex)
             {
